@@ -7,7 +7,7 @@
 % Page
 \definecolor {bgtan}    {HTML} {F7F2E5}	% DndReadAloud background
 \definecolor {bgtan2018}{HTML} {F9EFD6} % lighter version of bgtan from the 2018 Basic Rules
-\definecolor {pagegold} {HTML} {666666} % pagenumbers and footer
+\definecolor {pagegold} {HTML} {333333} % pagenumbers and footer
 
 % Type
 \definecolor {titlered}    {HTML} {58180D} % titles
