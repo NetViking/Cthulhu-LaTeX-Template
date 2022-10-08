@@ -1,4 +1,4 @@
-\documentclass[letterpaper,twocolumn,openany,nodeprecatedcode]{dndbook}
+\documentclass[a4paper,twocolumn,openany,nodeprecatedcode]{dndbook}
 
 % Use babel or polyglossia to automatically redefine macros for terms
 % Armor Class, Level, etc...
@@ -155,9 +155,12 @@ The |DndTable| colors the even rows and is set to the width of a line by default
 
     % If you want to use commas in the key values, enclose the values in braces.
     \DndMonsterBasics[
-        armor-class = {9 (12 with \emph{mage armor})},
-        hit-points  = {\DndDice{3d8 + 3}},
-        speed       = {30 ft., fly 30 ft.},
+        armor-class = {9 },
+        hit-points  = {\DndDice{3d100 + 3}},
+        sanitylos   = {30 ft., fly 30 ft.},
+        damagebonus = 2,
+        magicpoint = 2,
+        movementrange = 23,
       ]
 
     \DndMonsterAbilityScores[
@@ -176,9 +179,9 @@ The |DndTable| colors the even rows and is set to the width of a line by default
         %damage-resistances = {bludgeoning, piercing, and slashing from nonmagical attacks},
         %damage-immunities = {poison},
         %condition-immunities = {poisoned},
-        senses = {darkvision 60 ft., passive Perception 10},
-        languages = {Common, Goblin, Undercommon},
-        challenge = 1,
+        attacks = {darkvision 60 ft., passive Perception 10},
+        spells = {Common, Goblin, Undercommon},
+        special = 1,
       ]
     % Traits
     \DndMonsterAction{Innate Spellcasting}

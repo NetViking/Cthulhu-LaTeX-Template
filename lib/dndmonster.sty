@@ -149,6 +149,7 @@
 %% Monster basics
 \keys_define:nn { dnd / monster / basics }
   {
+  
     armor-class .tl_set:N          = \l__armor_class_tl,
     armor-class .initial:n         = 10,
     armor-class .value_required:n  = true,
@@ -157,9 +158,18 @@
     hit-points .initial:n        = \DndDice {1d8},
     hit-points .value_required:n = true,
     hitpoints .meta:n = { hit-points = {#1} },
-    speed .tl_set:N         = \l__speed_tl,
-    speed .initial:n        = 30 ~ \unitsname,
-    speed .value_required:n = true,
+    sanitylos .tl_set:N         = \l__speed_tl,
+    sanitylos .initial:n        = 30 ~ \unitsname,
+    sanitylos .value_required:n = true,
+    damagebonus .tl_set:N         = \l__damagebonus_tl,
+    damagebonus .initial:n        = 30 ~ \unitsname,
+    damagebonus .value_required:n = true,
+    magicpoint .tl_set:N         = \l__magicpoints_tl,
+    magicpoint .initial:n        = 30 ~ \unitsname,
+    magicpoint .value_required:n = true,
+    movementrange .tl_set:N         = \l__movementrange_tl,
+    movementrange .initial:n        = 30 ~ \unitsname,
+    movementrange .value_required:n = true,
   }
 
 \cs_new_protected_nopar:Npn \__dnd_monster_basics:
@@ -167,7 +177,10 @@
       \begin {__dnd_monster_attributes}
         \item [\armorclassname] \l__armor_class_tl
         \item [\hitpointsname]  \l__hit_points_tl
-        \item [\speedname]      \l__speed_tl
+        \item [\speedname]      \l__speed_tl 
+        \item [\damagebonus]      \l__damagebonus_tl 
+        \item [\magicpoints]      \l__magicpoints_tl 
+        \item [\movementrange]      \l__movementrange_tl 
       \end {__dnd_monster_attributes}
   }
 
@@ -242,46 +255,59 @@
 %% Monster details
 \keys_define:nn { dnd / monster / details }
 {
-  saving-throws .tl_set:N         = \l__saving_throws_tl,
-  saving-throws .value_required:n = true,
-  savingthrows .meta:n = { saving-throws = {#1} },
-  skills .tl_set:N         = \l__skills_tl,
-  skills .value_required:n = true,
-  damage-vulnerabilities .tl_set:N         = \l__damage_vulnerabilities_tl,
-  damage-vulnerabilities .value_required:n = true,
-  damagevulnerabilities .meta:n = { damage-vulnerabilities = {#1} },
-  damage-resistances .tl_set:N         = \l__damage_resistances_tl,
-  damage-resistances .value_required:n = true,
-  damageresistances .meta:n = { damage-resistances = {#1} },
-  damage-immunities .tl_set:N         = \l__damage_immunities_tl,
-  damage-immunities .value_required:n = true,
-  damageimmunities .meta:n = { damage-immunities = {#1} },
-  condition-immunities .tl_set:N         = \l__condition_immunities_tl,
-  condition-immunities .value_required:n = true,
-  conditionimmunities .meta:n = { condition-immunities = {#1} },
-  senses .tl_set:N         = \l__senses_tl,
-  senses .initial:n        = \defaultsensesname,
-  senses .value_required:n = true,
-  languages .tl_set:N         = \l__languages_tl,
-  languages .initial:n        = ---,
-  languages .value_required:n = true,
-  challenge .tl_set:N         = \l__challenge_tl,
-  challenge .initial:n        = 1,
-  challenge .value_required:n = true,
+  attacks  .initial:n        = \DndDice {1d8},
+  attacks .tl_set:N         = \l__attacks_tl,
+  attacks .value_required:n = true,
+  attack .meta:n = { attacks = {#1} },
+  spells .tl_set:N         = \l__spells_tl,
+  spells .value_required:n = true,
+  spell .meta:n = { spells = {#1} },
+  specials .tl_set:N         = \l__specials_tl,
+  specials .value_required:n = true,
+  special .meta:n = { specials = {#1} },
+    
+
+  
+%  saving-throws .tl_set:N         = \l__saving_throws_tl,
+%  saving-throws .value_required:n = true,
+%  savingthrows .meta:n = { saving-throws = {#1} },
+%  skills .tl_set:N         = \l__skills_tl,
+%  skills .value_required:n = true,
+%  damage-vulnerabilities .tl_set:N         = \l__damage_vulnerabilities_tl,
+%  damage-vulnerabilities .value_required:n = true,
+%  damagevulnerabilities .meta:n = { damage-vulnerabilities = {#1} },
+%  damage-resistances .tl_set:N         = \l__damage_resistances_tl,
+%  damage-resistances .value_required:n = true,
+%  damageresistances .meta:n = { damage-resistances = {#1} },
+%  damage-immunities .tl_set:N         = \l__damage_immunities_tl,
+%  damage-immunities .value_required:n = true,
+%  damageimmunities .meta:n = { damage-immunities = {#1} },
+%  condition-immunities .tl_set:N         = \l__condition_immunities_tl,
+%  condition-immunities .value_required:n = true,
+%  conditionimmunities .meta:n = { condition-immunities = {#1} },
+%  senses .tl_set:N         = \l__senses_tl,
+%  senses .initial:n        = \defaultsensesname,
+%  senses .value_required:n = true,
+%  languages .tl_set:N         = \l__languages_tl,
+%  languages .initial:n        = ---,
+%  languages .value_required:n = true,
+%  challenge .tl_set:N         = \l__challenge_tl,
+%  challenge .initial:n        = 1,
+%  challenge .value_required:n = true,
 }
 
 \cs_new_protected_nopar:Npn \__dnd_monster_details:
 {
     \begin {__dnd_monster_attributes}
-      \__dnd_if_monster_attribute:nn {\l__saving_throws_tl}          {\savesname}
-      \__dnd_if_monster_attribute:nn {\l__skills_tl}                 {\skillsname}
-      \__dnd_if_monster_attribute:nn {\l__damage_vulnerabilities_tl} {\dvulname}
-      \__dnd_if_monster_attribute:nn {\l__damage_resistances_tl}     {\dresname}
-      \__dnd_if_monster_attribute:nn {\l__damage_immunities_tl}      {\dimmname}
-      \__dnd_if_monster_attribute:nn {\l__condition_immunities_tl}   {\cimmname}
-      \item [\sensesname]    \l__senses_tl
-      \item [\languagesname] \l__languages_tl
-      \item [\challengename] \__dnd_cr_xp:N {\l__challenge_tl}
+      \__dnd_if_monster_attribute:nn {\l__attacks_tl}          {\attackname}
+      \__dnd_if_monster_attribute:nn {\l__spells_tl}                 {\magicname}
+      \__dnd_if_monster_attribute:nn {\l__specials_tl} {\specialname}
+%      \__dnd_if_monster_attribute:nn {\l__damage_resistances_tl}     {\dresname}
+%      \__dnd_if_monster_attribute:nn {\l__damage_immunities_tl}      {\dimmname}
+%      \__dnd_if_monster_attribute:nn {\l__condition_immunities_tl}   {\cimmname}
+%      \item [\attackname]    \l__attacks_tl
+%      \item [\magicname] \l__spells_tl
+%      \item [\specialname] \l__specials_tl
     \end {__dnd_monster_attributes}
 }
 
