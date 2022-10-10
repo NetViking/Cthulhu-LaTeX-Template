@@ -33,32 +33,46 @@
 
 \fancyhf {} % clear all headers and footers
 
+
+\fancypagestyle{mypagestyle}{%
+	\fancyhead{
+  				\begin{tikzpicture}[remember~picture,overlay]
+				  \node[inner~sep=0pt] at (current~page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{img/title}
+				  };
+				\end{tikzpicture}	
+				}
+			}
+			
+		\fancypagestyle{mypagestyle2}{%
+	\fancyhead{
+  				\begin{tikzpicture}[remember~picture,overlay]
+				  \node[inner~sep=0pt] at (current~page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{img/firstpage}
+				  };
+				\end{tikzpicture}	
+				}
+			}
+
+\fancypagestyle{mypagestyle3}{%			
 % Header is used to include the page background
 \fancyhead{
   \bool_if:NT \l__dnd_show_background_bool
     {
-	\ifthenelse{\isodd{\thepage}}%
-    {    
-	\begin{tikzpicture}[remember~picture,overlay]
-      \node[inner~sep=0pt] at (current~page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{img/paper_right}};
-	\end{tikzpicture}	
-	}
-    {    
-	\begin{tikzpicture}[remember~picture,overlay]
-      \node[inner~sep=0pt] at (current~page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{img/paper}
-	  };
-	\end{tikzpicture}	
-	}%
-
-	%\else
-	%\begin{tikzpicture}[remember~picture,overlay]
-%	  \node[inner~sep=0pt] at (current~page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{img/paper_right}};
- % \fi
-%	  \end{tikzpicture}
-
+		
+			\ifthenelse{\isodd{\thepage}}%
+			{    
+				\begin{tikzpicture}[remember~picture,overlay]
+				  \node[inner~sep=0pt] at (current~page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{img/paper_right}};
+				\end{tikzpicture}	
+			}
+			{    
+				\begin{tikzpicture}[remember~picture,overlay]
+				  \node[inner~sep=0pt] at (current~page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{img/paper}
+				  };
+				\end{tikzpicture}	
+			}%
     }
 }
-
+}
 % Left-even page footer
 \fancyfoot[LE]{%
     \DndFontFooter \leftmark
@@ -74,9 +88,9 @@
 \fancyfoot[RO]{%
     \DndFontFooter \leftmark
     \begin{tikzpicture}[remember~picture,overlay]
-      \bool_if:NT \l__dnd_show_footer_scroll_bool {
-        \node[inner~sep=0pt,anchor=south,nearly~opaque] at (current~page.south) {\includegraphics[width=\paperwidth,height=.6in]{img/footerscroll}};
-      }
+%      \bool_if:NT \l__dnd_show_footer_scroll_bool {
+%        \node[inner~sep=0pt,anchor=south,nearly~opaque] at (current~page.south) {\includegraphics[width=\paperwidth,height=.6in]{img/footerscroll}};
+%      }
       \node[inner~sep=0pt,anchor=south,xshift=-.28in,yshift=.39in] at (current~page.south~east) {\DndFontPageNumber \thepage};
     \end{tikzpicture}
   }

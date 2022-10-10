@@ -21,7 +21,7 @@
 \usepackage{shortvrb}
 \usepackage{stfloats}
 \usepackage{ifthen}
-
+\usepackage{titling}% the wheel somebody else kindly made for us earlier
 \captionsetup[table]{labelformat=empty,font={sf,sc,bf,},skip=0pt}
 
 \MakeShortVerb{|}
@@ -32,21 +32,53 @@
   breaklines=true,
 }
 
+\pretitle{% add some rules
+  \begin{center}
+    \Huge\bfseries\textcolor{white}
+}%, make the fonts bigger, make the title (only) bold
+\posttitle{%
+  \end{center}%
+  \noindent\vrule height 2.5pt width \textwidth
+  \vskip .75em plus .25em minus .25em% increase the vertical spacing a bit, make this particular glue stretchier
+}
+\preauthor{%
+  \begin{center}
+    \Large \lineskip 0.75em%
+    \vrule height 0.4pt width .25\textwidth\par
+    \begin{tabular}[t]{@{}l@{}}%
+    \textcolor{white}
+}
+\postauthor{%
+    \end{tabular}
+    \vskip -.5em
+    \par
+    \vrule height 0.4pt width .25\textwidth\par
+  \end{center}%
+}
+\predate{%
+  \begin{center}
+    \Large\textcolor{white}
+}
+\postdate{%
+  \end{center}%
+}
+
 \title{The Dark \LaTeX{} \\
 \large An Example of the dndbook Class}
 \author{The rpgTeX Team}
 \date{2020/04/21}
-
+\setcounter{page}{1}
 \begin{document}
 
 \frontmatter
 
+\pagestyle{mypagestyle}
 \maketitle
-
+\pagestyle{mypagestyle2}
 \tableofcontents
-
+\pagestyle{mypagestyle3}
 \mainmatter%
-
+\pagestyle{fancy}
 \part{Layout}
 
 \chapter{Sections}

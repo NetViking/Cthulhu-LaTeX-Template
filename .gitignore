@@ -7,3 +7,6 @@
 *.pdf
 *.synctex.gz
 *.toc
+*.xcf
+lib/*.xcf
+img/*.xcf
